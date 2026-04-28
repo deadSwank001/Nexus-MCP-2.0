@@ -1,0 +1,103 @@
+# Nexus MCP
+
+**Ollama-powered intelligent project context management for AI coding assistants**
+
+A superior replacement for [foundry-mcp](https://github.com/cafreeman/foundry-mcp) — where foundry is a filing cabinet, **Nexus is a second brain**.
+
+```bash
+pip install -e .
+nexus serve
+```
+
+## What Makes Nexus Better?
+
+| Feature | foundry-mcp | Nexus MCP |
+|---------|------------|-----------|
+| **Search** | Fuzzy string matching on names | **Semantic vector search** across all content |
+| **Context Loading** | Dumps raw files | **AI-summarized**, token-budgeted context |
+| **Session Tracking** | None | **Full session history** with decisions & outcomes |
+| **Cross-Project** | Siloed projects | **Concept linking** via embeddings |
+| **Suggestions** | Static strings | **Ollama-generated** contextual recommendations |
+| **Edit System** | 1336-line edit engine | **Direct content replacement** (AI handles text) |
+| **Documents** | Fixed 3-file schema | **Arbitrary document types** (ADRs, design docs) |
+| **Storage** | Flat files | **SQLite + FTS5 + vector store** |
+| **Natural Language** | None | **Ask questions** about your projects |
+| **Tools** | 11 tools | **20 tools** with intelligence layer |
+
+## Setup
+
+### Prerequisites
+- Python 3.10+
+- [Ollama](https://ollama.ai) (optional but recommended for AI features)
+
+### Install
+
+```bash
+# Clone and install
+git clone <repo-url>
+cd nexus-mcp
+pip install -e .
+
+# Pull Ollama models (optional)
+ollama pull llama3.2
+ollama pull nomic-embed-text
+```
+
+### Configure with AI Assistants
+
+```bash
+# For Cursor IDE
+nexus install cursor
+
+# For Claude Code
+nexus install claude-code
+
+# Check status
+nexus status
+```
+
+## Architecture
+
+```
+~/.nexus/
+├── nexus.db          # SQLite: metadata, FTS5, embeddings
+└── content/          # Backup-friendly content files
+```
+
+### 20 MCP Tools
+
+**Project Management** (5): `create_project`, `load_project`, `list_projects`, `analyze_codebase`, `archive_project`
+
+**Specifications** (5): `create_spec`, `load_spec`, `update_spec`, `delete_spec`, `diff_spec`
+
+**Intelligence** (5): `search`, `suggest_next_steps`, `find_related`, `ask_context`, `summarize_context`
+
+**Sessions** (3): `start_session`, `end_session`, `resume_session`
+
+**System** (2): `nexus_status`, `nexus_help`
+
+## How It Works
+
+### Without Ollama
+All CRUD operations work perfectly — create projects, manage specs, track sessions, full-text search via FTS5.
+
+### With Ollama
+Unlocks the intelligence layer:
+- **Semantic search**: Find content by meaning, not just keywords
+- **Smart summaries**: Token-optimized context for LLM windows
+- **Task suggestions**: AI-generated task breakdowns from specs
+- **Cross-project linking**: Discover related concepts via embeddings
+- **Natural language Q&A**: Ask questions about your projects
+
+## Development
+
+```bash
+# Install dev dependencies
+pip install -e ".[dev]"
+
+# Run tests
+python -m pytest tests/ -v
+```
+
+## License
+MIT
