@@ -1,0 +1,27 @@
+[project]
+name = "nexus-mcp"
+version = "0.1.0"
+description = "Ollama-powered intelligent project context management MCP server — a foundry-mcp killer"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=1.0.0",
+    "httpx>=0.27.0",
+    "aiosqlite>=0.20.0",
+    "click>=8.1.0",
+    "rich>=13.0.0",
+    "numpy>=1.24.0",
+    "pydantic>=2.0.0",
+    "toml>=0.10.0",
+]
+
+[project.scripts]
+nexus = "nexus_mcp.cli.main:cli"
+
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["nexus_mcp*"]
